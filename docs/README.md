@@ -1,9 +1,38 @@
 # tunnel-ngrok — docs
 
-ngrok driver (pure-Go SDK) for the togo `tunnel` subsystem.
+**ngrok.** Pure-Go tunnel via the ngrok-go SDK — no binary needed.
 
-- **Install:** `togo install togo-framework/tunnel-ngrok`
-- **Source:** https://github.com/togo-framework/tunnel-ngrok
-- **Base:** https://github.com/togo-framework/tunnel
+## Install
 
-Set `TUNNEL_DRIVER=ngrok` and `NGROK_AUTHTOKEN`. See the [README](../README.md).
+```bash
+togo install togo-framework/tunnel-ngrok
+```
+
+Registers on the [`tunnel`](https://github.com/togo-framework/tunnel) base; select it with **tunnel.provider in togo.yaml (or TUNNEL_DRIVER)**, then use **`togo tunnel`**.
+
+## Interface
+
+`Tunnel` — `Start(ctx, addr) -> publicURL`, `Stop`, `Status`.
+
+## Configuration
+
+| Env var | Description |
+|---|---|
+| `NGROK_AUTHTOKEN` | ngrok auth token (required). |
+| `NGROK_DOMAIN` | Reserved ngrok domain to bind. Optional. |
+
+## Usage & notes
+
+Uses `ngrok.ListenAndForward`; returns the public `.ngrok` URL (or your reserved `NGROK_DOMAIN`).
+
+## Example
+
+```bash
+togo tunnel:start --provider ngrok
+```
+
+## Links
+
+- [ngrok-go](https://github.com/ngrok/ngrok-go)
+- [Marketplace](https://to-go.dev/marketplace)
+- [Source](https://github.com/togo-framework/tunnel-ngrok)
